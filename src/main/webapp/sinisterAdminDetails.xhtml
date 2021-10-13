@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/template.xhtml">
+	
+    <ui:param name="page_name" value="Accueil" />
+
+    <ui:define name="menu">
+		
+		<div class="page-container">
+                   
+                    <!-- MAIN CONTENT-->
+
+                    <div class="main-content">
+
+                        <div class="section__content section__content--p30">
+
+                            <div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6">
+
+                                              <h:panelGroup columns="2">
+                                                <h:form>
+                                                    <table class="table table-data2">
+                                                        <tr>
+                                                            <td><h:outputText value="Date de Occurence"></h:outputText></td>
+                                                            <td>
+                                                                <h:inputText value="#{sinController.dateOccurence}" class="inputcontract" readonly="true">
+                                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                                </h:inputText>
+                                                            </td>
+                                                        </tr>
+                                                       
+                                
+                                                                <tr>
+                                                            <td><h:outputText value="Description"></h:outputText></td>
+                                                            <td>
+                                                                <h:inputText value="#{sinController.description}" class="inputcontract" readonly="true">
+                                                                  
+                                                                </h:inputText>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h:outputText value="Sinister Motif"></h:outputText></td>
+                                                            <td>
+                                                                <h:inputText value="#{sinController.motifStatus}" class="inputcontract" readonly="true">
+                                                                  
+                                                                </h:inputText>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><h:outputText value="Sinister Status"></h:outputText></td>
+                                                            <td>
+                                                                <h:inputText value="#{sinController.status}" class="inputcontract" readonly="true">
+                                                                  
+                                                                </h:inputText>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <h:commandButton styleClass="form-group btn btn-sm btn-outline-dark" style="width:100px" value="Retour" action = "/newAdmin?faces-redirect = true" />
+                                                                <span STYLE="padding:0 0 0 20px;"></span>
+                                                                   
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </h:form>
+                                            </h:panelGroup>
+						</div>
+			</div>
+					</div>
+			</div>
+						</div>
+			</div>
+
+
+
+
+
+
+
+
+	</ui:define>
+</ui:composition>

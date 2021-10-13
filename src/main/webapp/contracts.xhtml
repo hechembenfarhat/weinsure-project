@@ -1,0 +1,210 @@
+﻿<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:s="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+    <ui:param name="page_name" value="Vue Contrats" />
+
+    <ui:define name="menu">
+        <head>
+            <!-- Required meta tags-->
+
+            <meta charset="UTF-8" />
+
+
+            <!-- Title Page-->
+            <!-- Fontfaces CSS-->
+            <link href="css/font-face.css" rel="stylesheet" media="all" />
+            <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all" />
+            <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all" />
+            <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all" />
+            <!-- Bootstrap CSS-->
+            <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all" />
+            <!-- Vendor CSS-->
+            <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all" />
+            <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
+            <link href="vendor/wow/animate.css" rel="stylesheet" media="all" />
+            <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all" />
+            <link href="vendor/slick/slick.css" rel="stylesheet" media="all" />
+            <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+            <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all" />
+            <!-- Main CSS-->
+            <link href="css/theme.css" rel="stylesheet" media="all" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        </head>
+
+        <body class="animsition">
+            <!-- PAGE CONTAINER-->
+
+            <div class="page-container">
+
+                <!-- MAIN CONTENT-->
+
+                <div class="main-content">
+
+                    <div class="section__content section__content--p30">
+
+                        <div class="container-fluid">
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+
+                                    <!-- DATA TABLE -->
+
+                                    <h3 class="title-5 m-b-35">Liste des contrats</h3>
+
+
+                                    <div class="table-responsive table-responsive-data2">
+                                        <h:panelGrid columns="2">
+                                            <h:form>
+                                                <h:button value="Ajouter contrat" outcome="addcontract.jsf" class="returnbuttons" /> 
+
+                                                <h:dataTable value="#{ContractController.contracts}" var="contract" border="1" styleClass="table table-data2">
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Approuvé" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.approved == true ? 'Oui' : 'Non'}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="ID" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.idcontract}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Type" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.type}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Date de Création" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.creation_date}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Date d'éxpiration" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.expiration_date}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Durée" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.duration}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Prime" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.price}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Capital/Rente" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.cost}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Taux %" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.rate *100} %" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Provision" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.cost - contract.price}" >
+                                                            <f:convertNumber groupingUsed="true"
+                                                                             maxFractionDigits="2" /></h:outputText>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Assuré" />
+                                                        </f:facet>
+                                                        <h:outputText value="#{contract.user.firstName} #{contract.user.lastName}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Gérer" />
+                                                        </f:facet>
+                                                        <h:commandLink action="#{ContractController.deleteContract(contract.idcontract)}" value=""
+                                                                       onclick="return confirm('Voulez vous vraiment supprimer ce contrat ?')">
+                                                            <i class="fas fa-minus-circle"></i>
+                                                        </h:commandLink>
+                                                        <h:commandLink action="#{ContractController.afficherContract(contract)}" value=""
+                                                                       onclick="return confirm('Voulez vous vraiment modifier ce contrat ?')">
+                                                            <i class="far fa-edit"></i>
+                                                        </h:commandLink>
+                                                        <h:commandLink action="#{ContractController.approveContract(contract)}" value=""
+                                                                       onclick="return confirm('Voulez vous vraiment approuver ce contrat ?')">
+                                                            <i class="fas fa-check-circle"></i>
+                                                        </h:commandLink>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </h:form>
+                                        </h:panelGrid>
+                                        <br />
+                                        <br />
+                                        
+
+
+
+                                    </div>
+                                    <!-- END DATA TABLE -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Jquery JS-->
+
+            <script src="vendor/jquery-3.2.1.min.js"></script>
+            <!-- Bootstrap JS-->
+
+            <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+
+            <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+            <!-- Vendor JS       -->
+
+            <script src="vendor/slick/slick.min.js">
+            </script>
+
+            <script src="vendor/wow/wow.min.js"></script>
+
+            <script src="vendor/animsition/animsition.min.js"></script>
+
+            <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+            </script>
+
+            <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+
+            <script src="vendor/counter-up/jquery.counterup.min.js">
+            </script>
+
+            <script src="vendor/circle-progress/circle-progress.min.js"></script>
+
+            <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+            <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+
+            <script src="vendor/select2/select2.min.js">
+            </script>
+            <!-- Main JS-->
+
+            <script src="js/main.js"></script>
+            <!-- end document-->
+        </body>
+    </ui:define>
+</ui:composition>

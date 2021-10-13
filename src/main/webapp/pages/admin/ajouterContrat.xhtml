@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+
+	<ui:param name="page_name" value="Ajouter un contrat à un employé" />
+
+	<ui:define name="content">
+		<!-- BEGIN : TP1 JSF Introduction Login -->
+		<h:panelGroup>
+			<h:form>
+				<h:outputText value="Bonjour #{userController.authenticatedUser.firstName} #{userController.authenticatedUser.lastName} " />
+				<h:commandLink value="Déconnexion" action="#{userController.doLogout()}" />
+			</h:form>
+		</h:panelGroup>
+
+		<h:panelGroup columns="2">
+			<h:form>
+				<table>
+					<tr>
+				      <td><h:outputText value="Employe"></h:outputText></td>
+				      <td><h:selectOneMenu value="#{userController.userId}">
+						<f:selectItem itemLabel="Choisir l'Employe" />
+						<f:selectItems var="item" itemLabel="#{item.firstName} #{item.lastName}" itemValue="#{item.id}" value="#{userController.users}" />
+				   	</h:selectOneMenu></td>
+			     </tr>
+					<tr>
+						<td><h:outputText value="Date debut"></h:outputText></td>
+						<td><h:inputText value="#{userController.dateDebut}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:inputText></td>
+					</tr>
+					<tr>
+						<td>
+						<h:outputText value="Salaire"></h:outputText></td>
+						<td><h:inputText id="validateSalaire" value="#{userController.salaire}"
+						required="true" requiredMessage="le contrat doit spécifier le salaire"
+						validatorMessage="le salaire doit être compris entre 350 et 3500">
+						<f:converter converterId="javax.faces.Float"></f:converter>
+						<f:validateDoubleRange minimum="350" maximum="3500" for="validateSalaire"></f:validateDoubleRange>
+						<h:message for="validateSalaire" style="color=green"/>
+						</h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Type Contrat"></h:outputText></td>
+						<td><h:inputText value="#{userController.typeContrat}"></h:inputText></td>
+					</tr>
+					
+					<tr>
+						<td colspan="2">
+						<h:commandButton value="Ajouter Contrat" action="#{userController.addContrat()}" />
+						</td>
+					</tr>
+				</table>
+				
+			</h:form>
+		</h:panelGroup>
+		
+		<h:panelGroup columns="2">
+			<h:form>
+				<h:dataTable value="#{userController.contrats}" var="contrat" border="1">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Employé" />
+						</f:facet>
+						<h:outputText value="#{contrat.user.firstName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Type Contrat" />
+						</f:facet>
+						<h:outputText value="#{contrat.typeContrat}" />
+					</h:column>
+				
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Date debut" />
+						</f:facet>
+						<h:outputText value="#{contrat.dateDebut}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Salaire" />
+						</f:facet>
+						<h:outputText value="#{contrat.salaire}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+
+	</ui:define>
+</ui:composition>

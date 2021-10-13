@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/template/template.xhtml">
+	 <ui:param name="page_name" value="Accueil" />
+
+    <ui:define name="menu">
+
+			<div class="page-container">
+                   
+                    <!-- MAIN CONTENT-->
+
+                    <div class="main-content">
+
+                        <div class="section__content section__content--p30">
+
+                            <div class="container-fluid">
+
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+				<!-- DATA TABLE -->
+				<h3 class="title-5 m-b-35">Transaction List</h3>
+				<div class="table-responsive table-responsive-data2">
+				
+						<table class="table table-data2" style="white-space:nowrap;" >
+						<thead>
+							<tr>
+								<th>ID Transaction</th>
+								<th>Owner</th>
+								<th>Transaction Type</th>
+								<th>Transaction Status</th>
+								<th>Transaction Amount</th>			
+								<th>Transaction Date</th>	
+								<th>Contract Type</th>	
+								<th>Actions</th>		
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="transactions" items="#{transacController.tranSs}">
+						
+							<tr class="tr-shadow">
+								<td style="position: absolute;padding: 50px;font-weight: bold;">#{transactions.transactionid}</td>
+								<td><span class="block-email">#{transactions.transactionprice.getUser().getFirstName()} #{transactions.transactionprice.getUser().getLastName()}</span></td>
+								<td>#{transactions.transactionType}</td>
+								<c:choose>
+								<c:when test="#{transactions.transactionAmount > 0}">
+									<td><span class="status--process"> payé</span></td>
+								</c:when>
+								<c:otherwise>
+									<td><span class="status--process" style="color:red">Non payé</span></td>
+								</c:otherwise>
+								</c:choose>
+								
+								
+								
+								<td>#{transactions.transactionAmount}</td>
+								<td>#{transactions.transactionDate}</td>
+								<td>#{transactions.transactionprice.getType()}</td>
+								
+								<td>
+									<div class="table-data-feature">
+									<h:form class="form">
+										<h:commandButton styleClass="form-group btn btn-sm btn-outline-primary" style="width:100px"
+										value="Informations" action="#{transacController.displayTransaction(transactions)}" />
+										<h:commandButton styleClass=" form-group btn btn-sm btn-outline-danger" style="width:100px"
+										 action="#transacController.removeTransaction(transactions.transactionid)}" value="Supprimer"  />
+
+									</h:form>
+									</div>
+								</td>
+							</tr>
+							<tr class="spacer"></tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<!-- END DATA TABLE -->
+			</div>
+		</div>
+	</div>
+       </div>
+                    </div>
+                </div>
+
+
+
+
+	</ui:define>
+</ui:composition>

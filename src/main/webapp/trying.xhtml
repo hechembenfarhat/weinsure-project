@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/template.xhtml">
+       <ui:param name="page_name" value="Accueil" />
+
+    <ui:define name="menu">
+	<a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style="margin-top: 10px" href="../pages/listportefeuil.jsf" >listportefeuil</a>
+		
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_5e2db"></div>
+  <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/symbols/NASDAQ-FB/" rel="noopener" target="_blank"><span class="blue-text">FB graphique</span></a> par TradingView</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+  "width": 980,
+  "height": 610,
+  "symbol": "NASDAQ:FB",
+  "interval": "D",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "1",
+  "locale": "fr",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "withdateranges": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "watchlist": [
+    "NASDAQ:INTC",
+    "NASDAQ:GOOG",
+    "NASDAQ:FB"
+  ],
+  "calendar": true,
+  "container_id": "tradingview_5e2db"
+}
+  );
+  </script>
+</div>
+<!-- TradingView Widget END -->
+</ui:define>
+</ui:composition>

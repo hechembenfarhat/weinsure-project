@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Calendar Example</title>
+</h:head>
+<h:body>
+<div class="card">
+    <h:form>
+        <p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+
+        <h5 class="p-mt-0">Severities</h5>
+        <p:commandButton actionListener="#{growlView.showInfo}" update="growl" value="Info" styleClass="p-mr-2" style="width: 10rem" />
+        <p:commandButton actionListener="#{growlView.showWarn}" update="growl" value="Warn" styleClass="p-mr-2 ui-button-warning" style="width: 10rem" />
+        <p:commandButton actionListener="#{growlView.showError}" update="growl" value="Error" styleClass="ui-button-danger" style="width: 10rem" />
+
+        <h5>Multiple</h5>
+        <p:commandButton actionListener="#{growlView.showMultiple}" update="growl" value="Multiple" style="width: 10rem" styleClass="ui-button-outlined" />
+
+        <h5>Sticky</h5>
+        <p:commandButton actionListener="#{growlView.showSticky}" update="growl-sticky" value="Info" style="width: 10rem" styleClass="ui-button-help" />
+    </h:form>
+</div>
+</h:body>
+</html>  

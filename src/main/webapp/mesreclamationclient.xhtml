@@ -1,0 +1,196 @@
+﻿<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/templateu.xhtml">
+
+    <ui:param name="page_name" value="Vue Contrats" />
+
+    <ui:define name="menu">
+   
+    
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Gestion des contrats</title>
+        <!-- STYLESHEET -->
+        <!-- FONTS -->
+        <!-- Muli -->
+        <link href="https://fonts.googleapis.com/css?family=Signika:300,400,600,700" rel="stylesheet" />
+        <!-- icon -->
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="fonts/icons/fontawesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="fonts/icons/sharehub/style.css" />
+        <!-- Vendor -->
+        <!-- Custom -->
+        <link rel="stylesheet" href="vendor/magnificPopup/dist/magnific-popup.css" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" />
+
+        <!-- JAVA SCRIPT -->
+        <!-- require -->
+
+        <script data-main="js/app" src="vendor/require/require.js"></script>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <h:body>
+        <!-- HEADER -->
+        <!-- MAIN -->
+        <main>
+
+            <div class="container">
+                <!--sections-->
+
+                <div class="row">
+
+                    
+                    <h3 class="title-5 m-b-35">Liste Des Reclamations</h3>
+
+                    <br /> <br /> <br /> <br /> <br /> <br />
+                    
+                        <h:panelGrid columns="2">
+                            <h:form>
+                                <h:dataTable value="#{ContraintController.listContraintsClients}"
+                                    var="contraints" border="1" styleClass="table table-data2">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="id contraint" />
+                                        </f:facet>
+                                        <h:outputText value="#{contraints.idcontraint}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Decription" />
+                                        </f:facet>
+                                        <h:outputText value="#{contraints.description}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Date Contraint" />
+                                        </f:facet>
+                                        <h:outputText value="#{contraints.datecontraint}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Type" />
+                                        </f:facet>
+                                        <h:outputText value="#{contraints.type}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Image" />
+                                        </f:facet>
+                                        <h:outputLink target="_blank" value="http://localhost:9004/Media/#{contraint.idcontraint}/image">Download</h:outputLink>
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Gérer" />
+                                        </f:facet>
+                                        <h:commandButton
+                                            action="#{ContraintController.deleteContraint(contraints.idcontraint)}"
+                                            value="Supprimer" />
+                                            <h:commandButton
+                                            action="#{ContraintController.afficherContraint(contraints)}"
+                                            value="Modifier" />
+                                            
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </h:panelGrid>
+                        
+                        <br /> <br />
+
+
+
+                        <h3 class="title-5 m-b-35">Modifier une Reclamation </h3>
+                    <h:panelGrid columns="2">
+                        <h:form >
+                            <h:button value="Retour" outcome="contraints.jsf"
+                                class="returnbuttons" />
+                            <table class="table table-data2">
+                                <tr>
+                                    <td><h:outputText value="Description"></h:outputText></td>
+                                    <td><h:inputText
+                                            value="#{ContraintController.description}"
+                                            class="inputcontract" required="true"
+                                            requiredmessage="ce champs est obligatoire"></h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputText value="Type"></h:outputText></td>
+                                    <td><h:selectOneMenu
+                                            value="#{ContraintController.type}" required="true"
+                                            requiredmessage="ce champ est obligatoire">
+                                            <f:selectItem itemLabel="Choisir le type du reclamation" />
+                                            <f:selectItems value="#{ContraintController.types}" />
+                                        </h:selectOneMenu></td>
+                                </tr>
+                            
+                                <tr>
+                                    <td>
+                                
+                                    Choose a photo to upload : </td>
+                                    <td>	
+                                        <input name="myFile" type="file"/>
+                                    
+                                  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                       
+                                        
+                                        <h:commandButton action="#{ContraintController.updateContraint()}" value="Mettre a jour la reclamation" />
+                                        
+                                        
+                                    </td>
+                                    
+                                    
+                                </tr>
+                            </table>
+                        </h:form>
+                    </h:panelGrid> 
+
+                    <br /> <br />
+
+                    
+                        <br /> <br />
+                
+                    <br /> <br />
+
+                  
+                  
+                    <br /> <br />
+
+
+
+
+                    
+                    
+                    <br /> <br />
+                    
+
+                  
+
+
+
+
+                
+                </div>
+            </div>
+        </main>
+        <!-- FOOTER --><footer>
+
+            
+        </footer>
+    </h:body>
+        </ui:define>
+</ui:composition>

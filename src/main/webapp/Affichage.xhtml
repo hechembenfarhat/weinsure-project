@@ -1,0 +1,166 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+
+
+		<!-- ADD -->
+
+
+
+		<h:panelGroup columns="2">
+			<h:form>
+				<table>
+
+				
+
+					<tr>
+						<td><h:outputText value="Description"></h:outputText></td>
+						<td><h:inputText value="#{sinController.description}"></h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Date of Occurence" label="Date"></h:outputText></td>
+						<td><h:inputText value="#{sinController.dateOccurence}">
+								<f:convertDateTime pattern="yyyy-mm-dd" />
+							</h:inputText></td>
+
+					</tr>
+
+					
+
+					<tr>
+						<td><h:outputText value="Documents"></h:outputText></td>
+					</tr>
+
+					<!--  <td> 	<h:inputFile id="file-id" value="#{sinController.documents}"
+							required="true" requiredMessage="Please upload a file"
+							alt="upload file"></h:inputFile></td>
+					</tr> -->
+					<tr>
+						<td><h:outputText value="Documents"></h:outputText></td>
+						<td><h:inputText value="#{sinController.documents}"></h:inputText></td>
+					</tr>
+
+				
+
+
+					<tr>
+						<td colspan="2"><h:commandButton value="Ajouter Sinistre"
+								action="#{sinController.addSinistre()}" /></td>
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>
+
+
+
+
+
+
+		<!-- BEGIN : TP1 JSF FIICHAGE -->
+		<h:panelGroup columns="2">
+			<h:form>
+				<h:dataTable value="#{sinController.sinistres}" var="sinistre"
+					border="1">
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Login (Email)" />
+						</f:facet>
+						<h:outputText value="#{sinistre.idSinistre}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Prenom" />
+						</f:facet>
+						<h:outputText value="#{sinistre.typeSinistre}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputText value="#{sinistre.description}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Role" />
+						</f:facet>
+						<h:outputText value="#{sinistre.dateOccurence}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Actif" />
+						</f:facet>
+						<h:outputText value="#{sinistre.status}" />
+					</h:column>
+
+					<!-- SUPP -->
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton
+							action="#{sinController.removeSinistre(sinistre.idSinistre)}"
+							value="Remove" />
+						<!-- AFFICHAGE -->
+						<h:commandButton
+							action="#{sinController.displaySinistre(sinistre)}"
+							value="Display" />
+						<!-- UPDATE -->
+						<h:commandButton value="Update Sinistre"
+							action="#{sinController.updateSinistre()}" />
+
+
+
+					</h:column>
+
+
+
+				</h:dataTable>
+				<td colspan="2"><h:commandButton value="Update Status"
+						action="#{sinController.updateStatus()}" /></td>
+				<td colspan="2"><h:commandButton value="Send Mails" id="btn14"
+						action="#{sinController.sendMail()}"
+						onclick="alert('Mails Sent Successfully');" /></td>
+			</h:form>
+		</h:panelGroup>
+
+
+		<!-- CALCUUUL -->
+		<h:panelGroup columns="2">
+			<h:form>
+				<table>
+					<tr>
+						<td><h:outputText value="Sinister Type"></h:outputText></td>
+						<td><h:selectOneMenu value="#{sinController.typeSinistre}">
+								<f:selectItem itemLabel="Choose Type" itemValue="#{null}" />
+								<f:selectItems value="#{sinController.types}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+
+					
+
+
+
+					<tr>
+						<td colspan="2"><h:commandButton value="Calcul"
+								action="#{sinController.Calcul()}" /></td>
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>
+
+
+
+
+</ui:composition>
+
+
+
+
+
+
+

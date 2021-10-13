@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/template.xhtml"    xmlns:ct="http://www.chartistjsf.org/charts" 
+                xmlns:p="http://primefaces.org/ui"  >
+                     <link href="https//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
+  				<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+       <ui:param name="page_name" value="Accueil" />
+
+    <ui:define name="menu">
+    
+	<a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style="margin-top: 10px" href="../pages/listportefeuil.jsf" >listportefeuil</a>
+		
+<!-- TradingView Widget BEGIN -->
+<div class="page-container">
+                   
+                    <!-- MAIN CONTENT-->
+
+                    <div class="main-content">
+
+                        <div class="section__content section__content--p30">
+
+                            <div class="container-fluid">
+
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+   <div class="ct-chart ct-label"  ></div>
+   </div>
+      </div>
+          </div>
+              </div>
+                  </div>
+                      </div>
+
+
+     
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script>
+       // THIS IS WHERE THE ERROR OCCURS
+      var data = {
+  labels: ['                Entire Life Sinister', '                 Death Sinister', '                Temporary Death Borrower Sinister'],
+  series: [{value : #{sinController.cal()} , className :"myclass1"},{value : #{sinController.cal2()} , className :"myclass2"}, {value : #{sinController.caL3()} , className :"myclass3"}],
+ 
+};
+
+var options = {
+		 width: '1000px',
+		  height: '800px' ,
+		  scales: { scaleLabel: { fontSize: 5 } },
+		labelInterpolationFnc: function(value) {
+    return value[0]
+  }
+};
+
+var responsiveOptions = [
+  ['screen and (min-width: 640px)', {
+    chartPadding: 30,
+    labelOffset: 100,
+    labelDirection: 'explode',
+    labelInterpolationFnc: function(value) {
+      return value;
+    }
+  }],
+  ['screen and (min-width: 1024px)', {
+    labelOffset: 80,
+    chartPadding: 20
+  }]
+];
+
+new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+     </script>
+
+
+<style>
+     .myclass1 {
+  fill: #D82A6E;
+}
+     .myclass2 {
+  fill: #C92AD8;
+}
+     .myclass3 {
+  fill: #7B62E6;
+}
+.ct-label {
+    font-size: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+     </style>   
+<!-- TradingView Widget END -->
+</ui:define>
+</ui:composition>
